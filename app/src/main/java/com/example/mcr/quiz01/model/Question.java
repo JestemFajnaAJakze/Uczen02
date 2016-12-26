@@ -1,15 +1,21 @@
 package com.example.mcr.quiz01.model;
 
-import java.util.ArrayList;
-
 /**
- * Created by MCR on 09.09.2016.
+ * Created by mikolaj.mocarski on 2016-11-29.
  */
 public class Question {
 
+    private int question_id;
     private String name;
 
-    private ArrayList<Answer> answerList;
+
+    public int getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(int question_id) {
+        this.question_id = question_id;
+    }
 
     public String getName() {
         return name;
@@ -17,14 +23,6 @@ public class Question {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ArrayList<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(ArrayList<Answer> answerList) {
-        this.answerList = answerList;
     }
 
 

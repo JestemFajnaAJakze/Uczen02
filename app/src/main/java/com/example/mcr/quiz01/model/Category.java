@@ -1,27 +1,24 @@
 package com.example.mcr.quiz01.model;
-        import com.j256.ormlite.field.DatabaseField;
-        import com.j256.ormlite.table.DatabaseTable;
-/**
- * Created by MCR on 02.09.2016.
- */
 
+/**
+ * Created by MCR on 24.11.2016.
+ */
 public class Category {
 
-
-    private long id;
-
-
+    private int category_id;
     private String name;
 
-    private int imageResourceId;
-
-
-    public long getId() {
-        return id;
+    public Category(int category_id, String name) {
+        this.category_id = category_id;
+        this.name = name;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     public String getName() {
@@ -32,12 +29,5 @@ public class Category {
         this.name = name;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
-    }
-
-    public void setImageResourceId(int imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
 
 }
