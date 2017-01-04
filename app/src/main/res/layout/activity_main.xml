@@ -32,6 +32,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:text="Klasa"
+            android:id="@+id/className"
+            android:layout_weight="4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:text="Dostepne akcje"
             android:id="@+id/textView3"
             android:layout_weight="4"
@@ -46,27 +53,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Zarzadzaj kategoriami"
-                android:id="@+id/categoryButton"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:onClick="onClickCategory" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Zarzadzaj pytaniami"
-                android:id="@+id/questionButton"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:onClick="onClickQuestion" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Zarzadzaj testami"
+                android:text="Wykonaj test"
                 android:id="@+id/testButton"
                 android:layout_row="1"
                 android:layout_column="0"
@@ -76,8 +63,8 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Zarzadzaj kontami uczniow"
-                android:id="@+id/studentButton"
+                android:text="Przejrzyj wykonane testy"
+                android:id="@+id/doneTest"
                 android:layout_row="1"
                 android:layout_column="1"
                 android:layout_gravity="center" />

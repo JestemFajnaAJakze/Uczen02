@@ -2,12 +2,15 @@ package com.example.mcr.quiz01.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcr.quiz01.R;
@@ -40,11 +43,20 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
     private ArrayList<String>testsFinalListNames;
     private ArrayList<Integer>testsFinalListIds;
     private Test test;
+    private String studentName, studentEmail, studentClass;
+    private int studentId, studentSchoolClassId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_list);
+
+        studentClass = getIntent().getStringExtra("studentClass");
+        studentId = getIntent().getIntExtra("studentId", 0);
+        studentSchoolClassId = getIntent().getIntExtra("studentSchoolClassId", 0);
+
+        TextView title = (TextView)findViewById(R.id.titleTest);
+        title.setText("Dostepne testy dla klasy: "+studentClass);
 
         test_listview = (ListView) findViewById(R.id.test_listview);
         test_listview.setOnItemClickListener(this);
@@ -66,52 +78,23 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
             @Override
             public void success(List<Test> tests, retrofit.client.Response response) {
 
-                testsFinalList = new ArrayList<Test>();
                 testsFinalListNames = new ArrayList<>();
                 testsFinalListIds = new ArrayList<>();
-                 //test = new Test();
 
-                List<HashMap<String,Object>> testMapList = new ArrayList<>();
                 for(Test t: tests){
-                    HashMap<String, Object> testMap = new HashMap<>();
 
                     try {
 
-                       /* testMap.put(t.getClass().getField("test_id").getName(),t.getTest_id());
-                        testMap.put(t.getClass().getField("name").getName(),t.getName());*/
-//                        test.setTest_id(t.getTest_id());
-//                        test.setTest_name(t.getTest_name());
-//                        test.setCategory_name(t.getCategory_name());
-//                        test.setCategory_id(t.getCategory_id());
+
 
                         testsFinalListNames.add(t.getName());
                         testsFinalListIds.add(t.getTest_id());
-                        testsFinalList.add(t);
 
-                        /*test.setTest_id(t.getTest_id());
-                        test.setTest_name(t.getTest_name());
-                        test.setCategory_name(t.getCategory_name());
-                        test.setCategory_id(t.getCategory_id());
-*/
-
-                        //testMapList.add(testMap);
-                        //testsFinalList.add(test);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, testsFinalListNames);//{
-                    /*@Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        View view = super.getView(position, convertView, parent);
-                        TextView text = (TextView) view.findViewById(R.id.testName);
-                        text.setTextColor(Color.BLUE);
-                        return view;
-                    }
-                };;*/
-                /*SimpleAdapter adapter = new SimpleAdapter(getApplication(), testsFinalList, R.layout.list_item_test,
-                        new String [] {"name"},new int [] { R.id.testName});*/
-
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, testsFinalListNames);
                 test_listview.setAdapter(adapter);
             }
 
@@ -123,7 +106,7 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
                 error.printStackTrace();
             }
         };
-        methods.getTestsAll(cb);
+        methods.getTestsListByClassId(studentSchoolClassId, cb);
 
     }
 
@@ -152,49 +135,24 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
             @Override
             public void success(List<Test> tests, retrofit.client.Response response) {
 
-                testsFinalList = new ArrayList<Test>();
                 testsFinalListNames = new ArrayList<>();
                 testsFinalListIds = new ArrayList<>();
-                //test = new Test();
 
-                List<HashMap<String,Object>> testMapList = new ArrayList<>();
                 for(Test t: tests){
-                    HashMap<String, Object> testMap = new HashMap<>();
 
                     try {
 
-                       /* testMap.put(t.getClass().getField("test_id").getName(),t.getTest_id());
-                        testMap.put(t.getClass().getField("name").getName(),t.getName());*/
-//                        test.setTest_id(t.getTest_id());
-//                        test.setTest_name(t.getTest_name());
-//                        test.setCategory_name(t.getCategory_name());
-//                        test.setCategory_id(t.getCategory_id());
+
 
                         testsFinalListNames.add(t.getName());
                         testsFinalListIds.add(t.getTest_id());
-                        testsFinalList.add(t);
 
-                        /*test.setTest_id(t.getTest_id());
-                        test.setTest_name(t.getTest_name());
-                        test.setCategory_name(t.getCategory_name());
-                        test.setCategory_id(t.getCategory_id());
-*/
-
-                        //testMapList.add(testMap);
-                        //testsFinalList.add(test);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, testsFinalListNames);//{
-                    /*@Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        View view = super.getView(position, convertView, parent);
-                        TextView text = (TextView) view.findViewById(R.id.testName);
-                        text.setTextColor(Color.BLUE);
-                        return view;
-                    }
-                };;*/
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, testsFinalListNames);
+
                 test_listview.setAdapter(adapter);
             }
 
@@ -206,7 +164,8 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
                 error.printStackTrace();
             }
         };
-        methods.getTestsAll(cb);
+        methods.getTestsListByClassId(studentSchoolClassId, cb);
+
 
 
     }
@@ -219,6 +178,10 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
 
     public void onClickBackButton(View v){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("studentId", studentId);
+        intent.putExtra("studentSchoolClassId", studentSchoolClassId);
+        intent.putExtra("studentName", studentId);
+        intent.putExtra("studentClass", studentClass);
         startActivity(intent);
     }
 
@@ -236,6 +199,7 @@ public class TestListActivity extends Activity implements AdapterView.OnItemClic
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         intent.putExtra("position", testsFinalListIds.get(position));
         intent.putExtra("testName", testsFinalListNames.get(position));
+
 
         startActivity(intent);
     }

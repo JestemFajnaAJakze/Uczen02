@@ -9,6 +9,7 @@ package com.example.mcr.quiz01.network;
 import com.example.mcr.quiz01.model.Answer;
 import com.example.mcr.quiz01.model.Category;
 import com.example.mcr.quiz01.model.Question;
+import com.example.mcr.quiz01.model.SchoolClass;
 import com.example.mcr.quiz01.model.Student;
 import com.example.mcr.quiz01.model.Teacher;
 import com.example.mcr.quiz01.model.Test;
@@ -29,6 +30,9 @@ public interface RetrofitAPI {
     //dla nauczyciela lista testow
     @GET("/get_all_tests.php")
     void getTestsAll(Callback<List<Test>> cb);
+
+    @GET("/get_tests_list_by_class.php")
+    void getTestsListByClassId(@Query("schoolClass_id") int schoolClass_id, Callback<List<Test>> cb);
 
     @GET("/add_test.php")
     void addTest(@Query("category_id") int category_id, @Query("name") String name, Callback<List<Test>> cb);
@@ -97,6 +101,9 @@ public interface RetrofitAPI {
     void checkTeacher(@Query("email") String email, @Query("password") String password, Callback<List<Teacher>> cb);
 
     /////////////////////student//////////////////////////////////////////////////
+
+    @GET("/get_student_class.php")
+    void getStudentClass(@Query("schoolClass_id") int schoolClass_id, Callback<List<SchoolClass>> cb);
 
     //czy wolny email
     @GET("/is_student_exist.php")

@@ -40,10 +40,12 @@ public class LoginActivity extends Activity {
 
     public void onClickLogin(View v) {
 
-        String email = inputEmail.getText().toString().trim();
-        String password = inputPassword.getText().toString().trim();
+        /*String email = inputEmail.getText().toString().trim();
+        String password = inputPassword.getText().toString().trim();*/
 
 
+        String email = "Mikolaj@wat.pl";
+        String password = "Mikolaj123";
         // Check for empty data in the form
         if (!email.isEmpty() && !password.isEmpty()) {
             // login user
