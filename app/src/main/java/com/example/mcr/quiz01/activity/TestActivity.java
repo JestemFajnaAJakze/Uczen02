@@ -61,7 +61,7 @@ public class TestActivity extends Activity implements AdapterView.OnItemClickLis
         chosenTestId = getIntent().getIntExtra("position", 0);
         testName = getIntent().getStringExtra("testName");
         //categoryName = getIntent().getStringExtra("categoryName");
-
+        categoryName = "Matematyka";
 
         test_listview = (ListView) findViewById(R.id.test_listview);
         test_listview.setOnItemClickListener(this);
